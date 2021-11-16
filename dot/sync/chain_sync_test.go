@@ -5,6 +5,7 @@ package sync
 
 import (
 	"context"
+	"fmt"
 	"github.com/ChainSafe/gossamer/dot/network"
 	"github.com/ChainSafe/gossamer/dot/types"
 	"github.com/ChainSafe/gossamer/lib/common"
@@ -152,6 +153,7 @@ func Test_chainSync_dispatchWorker(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -397,6 +399,7 @@ func Test_chainSync_ignorePeer(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -452,6 +455,7 @@ func Test_chainSync_logSyncSpeed(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -507,6 +511,7 @@ func Test_chainSync_maybeSwitchMode(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -630,6 +635,7 @@ func Test_chainSync_setMode(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -750,6 +756,7 @@ func Test_chainSync_start(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -805,6 +812,7 @@ func Test_chainSync_stop(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -860,6 +868,7 @@ func Test_chainSync_sync(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }
@@ -978,6 +987,7 @@ func Test_chainSync_tryDispatchWorker(t *testing.T) {
 				maxWorkerRetries: tt.fields.maxWorkerRetries,
 				slotDuration:     tt.fields.slotDuration,
 			}
+			fmt.Printf("cs %v\n", cs)
 		})
 	}
 }

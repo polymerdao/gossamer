@@ -5,6 +5,7 @@ package sync
 
 import (
 	"context"
+	"fmt"
 	"github.com/ChainSafe/gossamer/dot/types"
 	"reflect"
 	"testing"
@@ -92,6 +93,7 @@ func Test_chainProcessor_handleBody(t *testing.T) {
 				finalityGadget:     tt.fields.finalityGadget,
 				blockImportHandler: tt.fields.blockImportHandler,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -179,6 +181,7 @@ func Test_chainProcessor_handleJustification(t *testing.T) {
 				finalityGadget:     tt.fields.finalityGadget,
 				blockImportHandler: tt.fields.blockImportHandler,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -261,6 +264,7 @@ func Test_chainProcessor_processReadyBlocks(t *testing.T) {
 				finalityGadget:     tt.fields.finalityGadget,
 				blockImportHandler: tt.fields.blockImportHandler,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -298,6 +302,7 @@ func Test_chainProcessor_start(t *testing.T) {
 				finalityGadget:     tt.fields.finalityGadget,
 				blockImportHandler: tt.fields.blockImportHandler,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -335,6 +340,7 @@ func Test_chainProcessor_stop(t *testing.T) {
 				finalityGadget:     tt.fields.finalityGadget,
 				blockImportHandler: tt.fields.blockImportHandler,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }

@@ -359,7 +359,7 @@ func TestService_CreateBlockResponse_Descending_EndHash(t *testing.T) {
 	require.Equal(t, big.NewInt(1), resp.BlockData[127].Number())
 }
 
-func TestService_checkOrGetDescendantHash(t *testing.T) {
+func TestService_checkOrGetDescendantHash_integeration(t *testing.T) {
 	t.Parallel()
 	s := newTestSyncer(t)
 	branches := map[int]int{

@@ -4,6 +4,7 @@
 package sync
 
 import (
+	"fmt"
 	"github.com/ChainSafe/gossamer/dot/types"
 	"github.com/ChainSafe/gossamer/lib/common"
 	"math/big"
@@ -172,6 +173,7 @@ func Test_disjointBlockSet_addToParentMap(t *testing.T) {
 				blocks:           tt.fields.blocks,
 				parentToChildren: tt.fields.parentToChildren,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -363,6 +365,7 @@ func Test_disjointBlockSet_removeBlock(t *testing.T) {
 				blocks:           tt.fields.blocks,
 				parentToChildren: tt.fields.parentToChildren,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
@@ -392,6 +395,7 @@ func Test_disjointBlockSet_removeLowerBlocks(t *testing.T) {
 				blocks:           tt.fields.blocks,
 				parentToChildren: tt.fields.parentToChildren,
 			}
+			fmt.Printf("s %v\n", s)
 		})
 	}
 }
