@@ -13,7 +13,7 @@ import (
 )
 
 // TestExportConfig tests exporting a toml configuration file
-func TestExportConfig(t *testing.T) {
+func TestExportConfigIntegration(t *testing.T) {
 	cfg, cfgFile := newTestConfigWithFile(t)
 	require.NotNil(t, cfg)
 

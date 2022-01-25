@@ -9,6 +9,7 @@ package dot
 import (
 	"math/big"
 	"reflect"
+	"sync"
 	"testing"
 
 	"github.com/ChainSafe/gossamer/dot/core"
@@ -24,7 +25,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestInitNode(t *testing.T) {
+func TestInitNode_Integration(t *testing.T) {
 	cfg := NewTestConfig(t)
 	require.NotNil(t, cfg)
 
@@ -50,7 +51,7 @@ func TestInitNode_GenesisSpec(t *testing.T) {
 	require.NoError(t, err)
 }
 
-func TestNodeInitialized(t *testing.T) {
+func TestNodeInitializedIntegration(t *testing.T) {
 	cfg := NewTestConfig(t)
 	require.NotNil(t, cfg)
 
@@ -69,7 +70,7 @@ func TestNodeInitialized(t *testing.T) {
 	require.Equal(t, expected, true)
 }
 
-func TestNewNode(t *testing.T) {
+func TestNewNodeIntegration(t *testing.T) {
 	cfg := NewTestConfig(t)
 	require.NotNil(t, cfg)
 
@@ -329,6 +330,19 @@ func TestInitNode_LoadBalances(t *testing.T) {
 	genbal := "0x0000000000000001"
 	expected, _ := common.HexToBytes(genbal)
 	require.Equal(t, expected, bal)
+}
+
+func TestNode_StopFunc(t *testing.T) {
+	testvar := "before"
+
+	node := &Node{
+		//Services: &services.ServiceRegistry{},
+		wg: sync.WaitGroup{},
+	}
+	node.wg.Add(1)
+
+	node.Stop()
+	require.Equal(t, testvar, "after")
 }
 
 func TestNode_PersistGlobalName_WhenInitialize(t *testing.T) {

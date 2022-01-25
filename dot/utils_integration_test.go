@@ -32,7 +32,7 @@ func TestNewConfigAndFile(t *testing.T) {
 }
 
 // TestInitNode
-func TestNewTestGenesis(t *testing.T) {
+func TestNewTestGenesis_Integration(t *testing.T) {
 	cfg := NewTestConfig(t)
 	require.NotNil(t, cfg)
 
@@ -42,7 +42,7 @@ func TestNewTestGenesis(t *testing.T) {
 	cfg.Init.Genesis = genFile
 }
 
-func TestNewTestGenesisFile(t *testing.T) {
+func TestNewTestGenesisFile_Integration(t *testing.T) {
 	cfg := NewTestConfig(t)
 	require.NotNil(t, cfg)
 
