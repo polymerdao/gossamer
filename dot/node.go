@@ -407,36 +407,6 @@ func newNode(cfg *Config, ks *keystore.GlobalKeystore, nbi nodeBuilderIface) (*N
 	return node, nil
 }
 
-//InitKeystore to initialize node keystore
-func InitKeystore(cfg *Config) (*keystore.GlobalKeystore, error) {
-	ks := keystore.NewGlobalKeystore()
-	// load built-in test keys if specified by `cfg.Account.Key`
-	err := keystore.LoadKeystore(cfg.Account.Key, ks.Acco)
-	if err != nil {
-		logger.Errorf("failed to load account keystore: %s", err)
-		return nil, err
-	}
-
-	err = keystore.LoadKeystore(cfg.Account.Key, ks.Babe)
-	if err != nil {
-		logger.Errorf("failed to load BABE keystore: %s", err)
-		return nil, err
-	}
-
-	err = keystore.LoadKeystore(cfg.Account.Key, ks.Gran)
-	if err != nil {
-		logger.Errorf("failed to load grandpa keystore: %s", err)
-		return nil, err
-	}
-
-	// if authority node, should have at least 1 key in keystore
-	if cfg.Core.Roles == types.AuthorityRole && (ks.Babe.Size() == 0 || ks.Gran.Size() == 0) {
-		return nil, ErrNoKeysProvided
-	}
-
-	return ks, nil
-}
-
 func setupTelemetry(cfg *Config, genesisData *genesis.Data) (mailer *telemetry.Mailer, err error) {
 	var telemetryEndpoints []*genesis.TelemetryEndpoint
 	if len(cfg.Global.TelemetryURLs) == 0 && genesisData != nil {
