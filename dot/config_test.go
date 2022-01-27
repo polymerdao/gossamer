@@ -5,7 +5,10 @@ package dot
 
 import (
 	"testing"
+	"time"
 
+	"github.com/ChainSafe/gossamer/internal/log"
+	"github.com/ChainSafe/gossamer/internal/pprof"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,7 +23,59 @@ func TestDevConfig(t *testing.T) {
 			name: "dev default",
 			want: &Config{
 				Global: GlobalConfig{
-					ID: "dev",
+					Name:         "Gossamer",
+					ID:           "dev",
+					BasePath:     "~/.gossamer/dev",
+					LogLvl:       log.Info,
+					MetricsPort:  9876,
+					RetainBlocks: 512,
+					Pruning:      "archive",
+				},
+				Log: LogConfig{
+					CoreLvl:           log.Info,
+					DigestLvl:         log.Info,
+					SyncLvl:           log.Info,
+					NetworkLvl:        log.Info,
+					RPCLvl:            log.Info,
+					StateLvl:          log.Info,
+					RuntimeLvl:        log.Info,
+					BlockProducerLvl:  log.Info,
+					FinalityGadgetLvl: log.Info,
+				},
+				Init: InitConfig{
+					Genesis: "./chain/dev/genesis-spec.json",
+				},
+				Account: AccountConfig{
+					Key: "alice",
+				},
+				Core: CoreConfig{
+					Roles:            byte(4),
+					BabeAuthority:    true,
+					BABELead:         true,
+					GrandpaAuthority: true,
+					WasmInterpreter:  "wasmer",
+					GrandpaInterval:  0,
+				},
+				Network: NetworkConfig{
+					Port: 7001,
+				},
+				RPC: RPCConfig{
+					Enabled:        true,
+					External:       false,
+					Unsafe:         false,
+					UnsafeExternal: false,
+					Port:           8545,
+					Host:           "localhost",
+					Modules: []string{"system", "author", "chain", "state", "rpc", "grandpa", "offchain",
+						"childstate", "syncstate", "payment"},
+					WSPort: 8546,
+					WS:     true,
+				},
+				Pprof: PprofConfig{
+					Enabled: true,
+					Settings: pprof.Settings{
+						ListeningAddress: "localhost:6060",
+					},
 				},
 			},
 		},
@@ -31,7 +86,7 @@ func TestDevConfig(t *testing.T) {
 			t.Parallel()
 
 			got := DevConfig()
-			assert.Equal(t, tt.want.Global.ID, got.Global.ID)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
@@ -47,7 +102,59 @@ func TestGssmrConfig(t *testing.T) {
 			name: "gossamer default",
 			want: &Config{
 				Global: GlobalConfig{
-					ID: "gssmr",
+					Name:         "Gossamer",
+					ID:           "gssmr",
+					BasePath:     "~/.gossamer/gssmr",
+					LogLvl:       log.Info,
+					MetricsPort:  9876,
+					RetainBlocks: 512,
+					Pruning:      "archive",
+				},
+				Log: LogConfig{
+					CoreLvl:           log.Info,
+					DigestLvl:         log.Info,
+					SyncLvl:           log.Info,
+					NetworkLvl:        log.Info,
+					RPCLvl:            log.Info,
+					StateLvl:          log.Info,
+					RuntimeLvl:        log.Info,
+					BlockProducerLvl:  log.Info,
+					FinalityGadgetLvl: log.Info,
+				},
+				Init: InitConfig{
+					Genesis: "./chain/gssmr/genesis-spec.json",
+				},
+				Account: AccountConfig{},
+				Core: CoreConfig{
+					Roles:            byte(4),
+					BabeAuthority:    true,
+					GrandpaAuthority: true,
+					WasmInterpreter:  "wasmer",
+					GrandpaInterval:  time.Second,
+				},
+				Network: NetworkConfig{
+					Port:              7001,
+					MinPeers:          1,
+					MaxPeers:          50,
+					DiscoveryInterval: time.Second * 10,
+				},
+				RPC: RPCConfig{
+					Port: 8545,
+					Host: "localhost",
+					Modules: []string{"system", "author", "chain", "state", "rpc", "grandpa", "offchain",
+						"childstate", "syncstate", "payment"},
+					WSPort:           8546,
+					WS:               false,
+					WSExternal:       false,
+					WSUnsafe:         false,
+					WSUnsafeExternal: false,
+				},
+				Pprof: PprofConfig{
+					Enabled: true,
+					Settings: pprof.Settings{
+						ListeningAddress: "localhost:6060",
+						BlockProfileRate: 0,
+					},
 				},
 			},
 		},
@@ -57,7 +164,7 @@ func TestGssmrConfig(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			got := GssmrConfig()
-			assert.Equal(t, tt.want.Global.ID, got.Global.ID)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
@@ -73,7 +180,58 @@ func TestKusamaConfig(t *testing.T) {
 			name: "kusama default",
 			want: &Config{
 				Global: GlobalConfig{
-					ID: "ksmcc3",
+					Name:         "Kusama",
+					ID:           "ksmcc3",
+					BasePath:     "~/.gossamer/kusama",
+					LogLvl:       log.Info,
+					MetricsPort:  9876,
+					RetainBlocks: 512,
+					Pruning:      "archive",
+				},
+				Log: LogConfig{
+					CoreLvl:           log.Info,
+					DigestLvl:         log.Info,
+					SyncLvl:           log.Info,
+					NetworkLvl:        log.Info,
+					RPCLvl:            log.Info,
+					StateLvl:          log.Info,
+					RuntimeLvl:        log.Info,
+					BlockProducerLvl:  log.Info,
+					FinalityGadgetLvl: log.Info,
+				},
+				Init: InitConfig{
+					Genesis: "./chain/kusama/genesis.json",
+				},
+				Account: AccountConfig{},
+				Core: CoreConfig{
+					Roles:           byte(1),
+					WasmInterpreter: "wasmer",
+					GrandpaInterval: 0,
+				},
+				Network: NetworkConfig{
+					Port:              7001,
+					Bootnodes:         nil,
+					ProtocolID:        "",
+					NoBootstrap:       false,
+					NoMDNS:            false,
+					MinPeers:          0,
+					MaxPeers:          0,
+					PersistentPeers:   nil,
+					DiscoveryInterval: 0,
+					PublicIP:          "",
+					PublicDNS:         "",
+				},
+				RPC: RPCConfig{
+					Port: 8545,
+					Host: "localhost",
+					Modules: []string{"system", "author", "chain", "state", "rpc", "grandpa", "offchain",
+						"childstate", "syncstate", "payment"},
+					WSPort: 8546,
+				},
+				Pprof: PprofConfig{
+					Settings: pprof.Settings{
+						ListeningAddress: "localhost:6060",
+					},
 				},
 			},
 		},
@@ -83,7 +241,7 @@ func TestKusamaConfig(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			got := KusamaConfig()
-			assert.Equal(t, tt.want.Global.ID, got.Global.ID)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
@@ -99,7 +257,44 @@ func TestPolkadotConfig(t *testing.T) {
 			name: "polkadot default",
 			want: &Config{
 				Global: GlobalConfig{
-					ID: "polkadot",
+					Name:         "Polkadot",
+					ID:           "polkadot",
+					BasePath:     "~/.gossamer/polkadot",
+					LogLvl:       log.Info,
+					MetricsPort:  9876,
+					RetainBlocks: 512,
+					Pruning:      "archive",
+				},
+				Log: LogConfig{
+					CoreLvl:           log.Info,
+					DigestLvl:         log.Info,
+					SyncLvl:           log.Info,
+					NetworkLvl:        log.Info,
+					RPCLvl:            log.Info,
+					StateLvl:          log.Info,
+					RuntimeLvl:        log.Info,
+					BlockProducerLvl:  log.Info,
+					FinalityGadgetLvl: log.Info,
+				},
+				Init: InitConfig{Genesis: "./chain/polkadot/genesis.json"},
+				Core: CoreConfig{
+					Roles:           byte(1),
+					WasmInterpreter: "wasmer",
+				},
+				Network: NetworkConfig{
+					Port: 7001,
+				},
+				RPC: RPCConfig{
+					Port: 8545,
+					Host: "localhost",
+					Modules: []string{"system", "author", "chain", "state", "rpc", "grandpa", "offchain",
+						"childstate", "syncstate", "payment"},
+					WSPort: 8546,
+				},
+				Pprof: PprofConfig{
+					Settings: pprof.Settings{
+						ListeningAddress: "localhost:6060",
+					},
 				},
 			},
 		},
@@ -109,7 +304,7 @@ func TestPolkadotConfig(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			got := PolkadotConfig()
-			assert.Equal(t, tt.want.Global.ID, got.Global.ID)
+			assert.Equal(t, tt.want, got)
 		})
 	}
 }
