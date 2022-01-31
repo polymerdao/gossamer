@@ -22,6 +22,11 @@ func findAndRecord(t *Trie, key []byte, recorder recorder) error {
 }
 
 func find(parent Node, key []byte, recorder recorder) error {
+	// Child at this branch position does not exist.
+	if parent == nil {
+		return nil
+	}
+
 	enc, hash, err := parent.EncodeAndHash()
 	if err != nil {
 		return err

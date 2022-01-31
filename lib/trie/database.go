@@ -137,7 +137,8 @@ func (t *Trie) loadProof(proofHashToNode map[string]Node, n Node) {
 		if !ok {
 			continue
 		}
-		delete(proofHashToNode, proofHash)
+		// NB: Uniqueness assumption here breaks when we have duplicate node values for same branch.
+		// delete(proofHashToNode, proofHash)
 
 		branch.Children[i] = node
 		t.loadProof(proofHashToNode, node)
